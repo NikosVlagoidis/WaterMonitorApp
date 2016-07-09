@@ -47,15 +47,15 @@ public class MainActivity extends AppCompatActivity {
 
         // Configure LineChartView
         chartView = (LineChartView) findViewById(R.id.chart);
-        chartView.setZoomEnabled(false);
+        chartView.setZoomEnabled(true);
         chartView.setValueSelectionEnabled(true);
 
-        // Create a line chart from Field1 of ThinkSpeak Channel 9
+        // Create a line chart from Field1 of ThinkSpeak Channel of your Choice (132764)
         tsChart = new ThingSpeakLineChart(132764, 1);
         // Get 200 entries at maximum
         tsChart.setNumberOfEntries(200);
         // Set value axis labels on 10-unit interval
-        tsChart.setValueAxisLabelInterval(10);
+        tsChart.setValueAxisLabelInterval(1);
         // Set date axis labels on 5-minute interval
         tsChart.setDateAxisLabelInterval(1);
         // Show the line as a cubic spline
