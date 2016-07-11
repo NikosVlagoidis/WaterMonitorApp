@@ -25,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        Bundle getData = getIntent().getExtras();
+//        String getData = getData.getString(“key”);
+//        editText.setText(getData);
+
+
         // Connect to ThinkSpeak Channel 9
         tsChannel = new ThingSpeakChannel(132764);
         // Set listener for Channel feed update events
