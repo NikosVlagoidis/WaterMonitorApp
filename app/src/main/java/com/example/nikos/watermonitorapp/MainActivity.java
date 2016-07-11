@@ -80,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         });
         // Load chart data asynchronously
         tsChart.loadChartData();
+
+
     }
 
 
