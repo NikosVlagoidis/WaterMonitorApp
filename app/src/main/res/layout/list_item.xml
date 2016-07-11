@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/deviceItem"
+    android:layout_width="match_parent"
+    android:layout_height="80sp"
+    android:gravity="center_vertical"
+    android:textAlignment="center"
+    android:textSize="24sp"
+    android:fontFamily="sans-serif-condensed"
+    android:textColor="#FFFFFF"
+
+    />
