@@ -33,6 +33,7 @@ public class ColumnChartFragment extends Fragment {
     private static final int STACKED_DATA = 2;
     private static final int NEGATIVE_SUBCOLUMNS_DATA = 3;
     private static final int NEGATIVE_STACKED_DATA = 4;
+    private static final String ARG_SECTION_NUMBER = "section_number";
 
     private ColumnChartView chart;
     private ColumnChartData data;
@@ -43,6 +44,18 @@ public class ColumnChartFragment extends Fragment {
     private int dataType = DEFAULT_DATA;
 
     public ColumnChartFragment() {
+    }
+
+    /**
+     * Returns a new instance of this fragment for the given section
+     * number.
+     */
+    public static ColumnChartFragment newInstance(int sectionNumber) {
+        ColumnChartFragment fragment = new ColumnChartFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override

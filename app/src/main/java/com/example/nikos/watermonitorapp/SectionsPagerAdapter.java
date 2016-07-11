@@ -18,7 +18,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a LineChartFragment (defined as a static inner class below).
-        return LineChartFragment.newInstance(position + 1);
+        return position == 0 ? LineChartFragment.newInstance(position + 1):
+                ColumnChartFragment.newInstance(position + 1);
     }
 
     @Override
@@ -38,4 +39,3 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return null;
     }
 }
-
