@@ -88,7 +88,7 @@ public class LineChartFragment extends Fragment {
     // menu
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_fragment, menu);
+        inflater.inflate(R.menu.menu_line_fragment, menu);
     }
 
     @Override
