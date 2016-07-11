@@ -15,7 +15,7 @@ public class ChannelMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.channel_menu_layout);
         updateList();
     }
 
@@ -24,7 +24,7 @@ public class ChannelMenu extends AppCompatActivity {
      */
     private String[] getChannelFromManager(){
         /*Create a ConnectionManager Object and get channel method.*/
-        //ConnectionManager cnm = new ConnectionManager();
+        ConnectionManager cnm = new ConnectionManager();
 
         /*This String[] is for a quick testing*/
         String devices[] ={"Kitchen", "Bathroom", "Garden"};
@@ -38,7 +38,7 @@ public class ChannelMenu extends AppCompatActivity {
     private void updateList() {
         String data[] = getChannelFromManager();
 
-        ArrayAdapter<String> devAdapter = new ArrayAdapter<String>(ChannelMenu.this, R.layout.device_item, data);
+        ArrayAdapter<String> devAdapter = new ArrayAdapter<String>(ChannelMenu.this, R.layout.list_item, data);
         ListView deviceView = (ListView) findViewById(R.id.AvailableDeviceslistView);
         deviceView.setAdapter(devAdapter);
 
