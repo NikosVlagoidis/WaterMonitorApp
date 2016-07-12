@@ -2,6 +2,7 @@ package com.example.nikos.watermonitorapp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import lecho.lib.hellocharts.animation.ChartAnimationListener;
@@ -31,10 +33,10 @@ public class LineChartFragment extends Fragment {
     private LineChartView lineChart;
     private LineChartData data;
     private int numOfLines = 1;
-    private int maxNumOfLines = 4;
-    private int numOfPoints = 12;
+    private int maxNumOfLines = 100;
+    private int numOfPoints = 100;
 
-    float[][] randomNumbersTab = new float[maxNumOfLines][numOfPoints];
+    float[][] randomNumbersTab=new float[maxNumOfLines][numOfPoints];
 
     private boolean hasAxes = true;
     private boolean hasAxesNames = true;
@@ -64,16 +66,13 @@ public class LineChartFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+                             Bundle savedInstanceState){
+        getData();
         setHasOptionsMenu(true);
         View rootView = inflater.inflate(R.layout.fragment_line_chart, container, false);
 
         lineChart = (LineChartView) rootView.findViewById(R.id.lineChart);
         lineChart.setOnValueTouchListener(new ValueTouchListener());
-
-        // Generate some random values.
-        generateValues();
 
         generateData();
 
@@ -98,10 +97,6 @@ public class LineChartFragment extends Fragment {
             case R.id.action_reset:
                 reset();
                 generateData();
-                return true;
-
-            case R.id.action_add_line:
-                addLineToData();
                 return true;
 
             case R.id.action_toggle_lines:
@@ -148,11 +143,6 @@ public class LineChartFragment extends Fragment {
                 toggleAxesNames();
                 return true;
 
-            case R.id.action_animate:
-                prepareDataAnimation();
-                lineChart.startDataAnimation();
-                return true;
-
             case R.id.action_toggle_selection_mode:
                 toggleLabelForSelected();
                 Toast.makeText(getActivity(),
@@ -180,17 +170,6 @@ public class LineChartFragment extends Fragment {
 
             default:
                 return super.onOptionsItemSelected(item);
-        }
-    }
-
-    /**
-     * Generate random values
-     */
-    private void generateValues() {
-        for (int i = 0; i < maxNumOfLines; ++i) {
-            for (int j = 0; j < numOfPoints; ++j) {
-                randomNumbersTab[i][j] = (float) Math.random() * 100f;
-            }
         }
     }
 
@@ -234,62 +213,49 @@ public class LineChartFragment extends Fragment {
      */
     private void generateData() {
 
-        List<Line> lines = new ArrayList<>();
-        for (int i = 0; i < numOfLines; ++i) {
+        if(randomNumbersTab!=null) {
+            List<Line> lines = new ArrayList<>();
+            for (int i = 0; i < numOfLines; ++i) {
 
-            List<PointValue> values = new ArrayList<>();
-            for (int j = 0; j < numOfPoints; ++j) {
-                values.add(new PointValue(j, randomNumbersTab[i][j]));
+                List<PointValue> values = new ArrayList<>();
+                for (int j = 0; j < numOfPoints; ++j) {
+                    values.add(new PointValue(j, randomNumbersTab[i][j]));
+                }
+                Log.i("sad",Arrays.toString(randomNumbersTab[2]));
+                Line line = new Line(values);
+                line.setColor(ChartUtils.COLORS[i]);
+                line.setShape(shape);
+                line.setCubic(isCubic);
+                line.setFilled(isFilled);
+                line.setHasLabels(hasLabels);
+                line.setHasLabelsOnlyForSelected(hasLabelForSelected);
+                line.setHasLines(hasLines);
+                line.setHasPoints(hasPoints);
+                if (pointsHaveDifferentColor) {
+                    line.setPointColor(ChartUtils.COLORS[(i + 1) % ChartUtils.COLORS.length]);
+                }
+                lines.add(line);
             }
 
-            Line line = new Line(values);
-            line.setColor(ChartUtils.COLORS[i]);
-            line.setShape(shape);
-            line.setCubic(isCubic);
-            line.setFilled(isFilled);
-            line.setHasLabels(hasLabels);
-            line.setHasLabelsOnlyForSelected(hasLabelForSelected);
-            line.setHasLines(hasLines);
-            line.setHasPoints(hasPoints);
-            if (pointsHaveDifferentColor){
-                line.setPointColor(ChartUtils.COLORS[(i + 1) % ChartUtils.COLORS.length]);
+            data = new LineChartData(lines);
+
+            if (hasAxes) {
+                Axis axisX = new Axis();
+                Axis axisY = new Axis().setHasLines(true);
+                if (hasAxesNames) {
+                    axisX.setName("Axis X");
+                    axisY.setName("Axis Y");
+                }
+                data.setAxisXBottom(axisX);
+                data.setAxisYLeft(axisY);
+            } else {
+                data.setAxisXBottom(null);
+                data.setAxisYLeft(null);
             }
-            lines.add(line);
+
+            data.setBaseValue(Float.NEGATIVE_INFINITY);
+            lineChart.setLineChartData(data);
         }
-
-        data = new LineChartData(lines);
-
-        if (hasAxes) {
-            Axis axisX = new Axis();
-            Axis axisY = new Axis().setHasLines(true);
-            if (hasAxesNames) {
-                axisX.setName("Axis X");
-                axisY.setName("Axis Y");
-            }
-            data.setAxisXBottom(axisX);
-            data.setAxisYLeft(axisY);
-        } else {
-            data.setAxisXBottom(null);
-            data.setAxisYLeft(null);
-        }
-
-        data.setBaseValue(Float.NEGATIVE_INFINITY);
-        lineChart.setLineChartData(data);
-
-    }
-
-    /**
-     * Adds line to data and reset.
-     */
-    private void addLineToData() {
-        if (data.getLines().size() >= maxNumOfLines) {
-            Toast.makeText(getActivity(), "Samples app uses max 4 lines!", Toast.LENGTH_SHORT).show();
-            return;
-        } else {
-            ++numOfLines;
-        }
-
-        generateData();
     }
 
     /**
@@ -445,16 +411,16 @@ public class LineChartFragment extends Fragment {
         generateData();
     }
 
-    /**
-     * random reanimation of the graph changing only y values
-     */
-    private void prepareDataAnimation() {
-        for (Line line : data.getLines()) {
-            for (PointValue value : line.getValues()) {
-                //modify y values
-                value.setTarget(value.getX(), (float) Math.random() * 100);
-            }
-        }
+
+    private void getData(){
+        DataThread dt = new DataThread(randomNumbersTab);
+        dt.start();
+        try{
+            dt.join();
+            Log.i("T_JOIN","JOINED");
+        }catch(InterruptedException m){
+            Log.i("INTERRUPTED","INTERRUPTED");}
+
     }
 
     private class ValueTouchListener implements LineChartOnValueSelectListener {
