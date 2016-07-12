@@ -16,6 +16,8 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import com.macroyau.thingspeakandroid.ThingSpeakChannel;
+
 
 public class ChannelMenu extends AppCompatActivity {
 
@@ -23,13 +25,18 @@ public class ChannelMenu extends AppCompatActivity {
     private SimpleCursorAdapter adapter;
     private ConnectionManager conmanager;
     private MyDbHelper dbHelper;
+    private ThingSpeakChannel tsChannel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.channel_menu_fab);
+
+        tsChannel = new ThingSpeakChannel(132764);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.plus_fab);
         fab.setOnClickListener(new View.OnClickListener() {

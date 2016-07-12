@@ -14,9 +14,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".AddChannelActivity"></activity>
-        <activity android:name=".GraphActivity"></activity>
+
+        <activity android:name=".AddChannelActivity"
+            android:parentActivityName = ".ChannelMenu"
+            >
+
+        </activity>
+        <activity android:name=".GraphActivity"
+            android:parentActivityName = ".ChannelMenu">
+
+        </activity>
 
     </application>
 
