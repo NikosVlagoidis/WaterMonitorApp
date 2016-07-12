@@ -2,6 +2,7 @@ package com.example.nikos.watermonitorapp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,11 +29,6 @@ import lecho.lib.hellocharts.view.ColumnChartView;
  */
 public class ColumnChartFragment extends Fragment {
 
-    private static final int DEFAULT_DATA = 0;
-    private static final int SUBCOLUMNS_DATA = 1;
-    private static final int STACKED_DATA = 2;
-    private static final int NEGATIVE_SUBCOLUMNS_DATA = 3;
-    private static final int NEGATIVE_STACKED_DATA = 4;
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     private ColumnChartView chart;
@@ -41,8 +37,9 @@ public class ColumnChartFragment extends Fragment {
     private boolean hasAxesNames = true;
     private boolean hasLabels = false;
     private boolean hasLabelForSelected = false;
-    private int dataType = DEFAULT_DATA;
-
+    private int maxNumOfLines = 100;
+    private int numOfPoints = 100;
+    float[][] randomNumbersTab=new float[maxNumOfLines][numOfPoints];
     public ColumnChartFragment() {
     }
 
@@ -60,6 +57,7 @@ public class ColumnChartFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getData();
         setHasOptionsMenu(true);
 
         View rootView = inflater.inflate(R.layout.fragment_column_chart, container, false);
@@ -134,14 +132,13 @@ public class ColumnChartFragment extends Fragment {
         hasAxesNames = true;
         hasLabels = false;
         hasLabelForSelected = false;
-        dataType = DEFAULT_DATA;
         chart.setValueSelectionEnabled(hasLabelForSelected);
 
     }
 
     private void generateData() {
         int numSubcolumns = 1;
-        int numColumns = 8;
+        int numColumns = 100;
         // Column can have many subcolumns, here 1 subcolumn in each column.
         List<Column> columns = new ArrayList<>();
         List<SubcolumnValue> values;
@@ -149,7 +146,7 @@ public class ColumnChartFragment extends Fragment {
 
             values = new ArrayList<>();
             for (int j = 0; j < numSubcolumns; ++j) {
-                values.add(new SubcolumnValue((float) Math.random() * 50f + 5, ChartUtils.pickColor()));
+                values.add(new SubcolumnValue(randomNumbersTab[0][i], ChartUtils.pickColor()));
             }
 
             Column column = new Column(values);
@@ -224,15 +221,14 @@ public class ColumnChartFragment extends Fragment {
         generateData();
     }
 
-    /**
-     * Random reanimation of the graph changing y values
-     */
-    private void prepareDataAnimation() {
-        for (Column column : data.getColumns()) {
-            for (SubcolumnValue value : column.getValues()) {
-                value.setTarget((float) Math.random() * 100);
-            }
-        }
+    private void getData(){
+        DataThread dt = new DataThread(randomNumbersTab);
+        dt.start();
+        try{
+            dt.join();
+        }catch(InterruptedException m){
+            Log.i("INTERRUPTED","INTERRUPTED");}
+
     }
 
     private class ValueTouchListener implements ColumnChartOnValueSelectListener {

@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import lecho.lib.hellocharts.animation.ChartAnimationListener;
@@ -221,7 +220,6 @@ public class LineChartFragment extends Fragment {
                 for (int j = 0; j < numOfPoints; ++j) {
                     values.add(new PointValue(j, randomNumbersTab[i][j]));
                 }
-                Log.i("sad",Arrays.toString(randomNumbersTab[2]));
                 Line line = new Line(values);
                 line.setColor(ChartUtils.COLORS[i]);
                 line.setShape(shape);
@@ -417,7 +415,6 @@ public class LineChartFragment extends Fragment {
         dt.start();
         try{
             dt.join();
-            Log.i("T_JOIN","JOINED");
         }catch(InterruptedException m){
             Log.i("INTERRUPTED","INTERRUPTED");}
 
