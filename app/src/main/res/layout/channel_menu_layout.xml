@@ -16,7 +16,7 @@
         android:text="Your Available Devices are the following"
         android:padding="15sp"
         android:gravity="bottom"
-        />
+        android:layout_gravity="center" />
 
     <ListView
         android:textAlignment="center"
