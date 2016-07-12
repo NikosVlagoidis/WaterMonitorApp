@@ -1,5 +1,6 @@
 package com.example.nikos.watermonitorapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,10 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class AddChannelActivity extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
+
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_add_channel);
@@ -45,12 +47,10 @@ public class AddChannelActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String s = ChannelId.getText().toString();
-                Bundle forChannelMenu= new Bundle();
-                forChannelMenu.putString("ChannelId", s);
-                Intent a=new Intent(AddChannelActivity.this,MainActivity.class);
-                a.putExtras(forChannelMenu);
-                startActivity(a);
-
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("result",s);
+                setResult(Activity.RESULT_OK,returnIntent);
+                finish();
             }
         });
 

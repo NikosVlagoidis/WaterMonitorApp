@@ -32,7 +32,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go!"
+        android:text="Add This Channel!"
         android:clickable="false"
         android:id="@+id/GoBtn"
         android:layout_centerVertical="true"
