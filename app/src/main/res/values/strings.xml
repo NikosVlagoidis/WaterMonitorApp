@@ -2,4 +2,6 @@
     <string name="app_name">WaterMonitorApp</string>
     <string name="addChannelButton">Add Channel</string>
     <string name="channelIdText">Give a Channel ID</string>
+    <string name="setNicknameText">Enter a Nickname</string>
+    <string name="availableDevicesPromt">Your Available Devices</string>
 </resources>

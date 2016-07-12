@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Give your Nickname"
+        android:text="@string/setNicknameText"
         android:layout_gravity="center"
         android:id="@+id/getNicknamePrompt"
 
@@ -39,7 +39,6 @@
         android:layout_weight="1"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/channelIdText"
-        android:text="Give a Channel ID"
         android:layout_gravity="center"
         android:id="@+id/getIdPrompt"
 
@@ -70,7 +69,7 @@
             android:layout_height="wrap_content"
 
             android:layout_gravity="center"
-            android:text="Add This Channel!"
+            android:text="@string/addChannelButton"
             android:clickable="false"
             android:id="@+id/GoBtn"
             android:layout_centerVertical="true"
@@ -79,17 +78,6 @@
 
 
     </RelativeLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/addChannelButton"
-        android:clickable="false"
-        android:id="@+id/GoBtn"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-
 
 
 </LinearLayout>

@@ -13,7 +13,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Available Devices are the following"
+        android:text="@string/availableDevicesPromt"
+        android:id = "@+id/availableDevicesPromt"
         android:padding="15sp"
         android:gravity="bottom"
         android:layout_gravity="center" />
