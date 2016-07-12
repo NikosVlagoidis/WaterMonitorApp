@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
         // Connect to ThinkSpeak Channel 9
         tsChannel = new ThingSpeakChannel(132764);
         // Set listener for Channel feed update events

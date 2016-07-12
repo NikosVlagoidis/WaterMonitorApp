@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -63,9 +64,12 @@ public class ChannelMenu extends AppCompatActivity {
         deviceView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ChannelMenu.this, GraphActivity.class);
-                //intent.putExtra("key1", id);
-                startActivity(intent);
+
+                int item = ((Cursor) deviceView.getItemAtPosition(position)).getInt(1);
+
+                Intent i = new Intent(ChannelMenu.this, GraphActivity.class);
+                i.putExtra("kati",item);
+                startActivity(i);
             }
 
         });
@@ -75,7 +79,7 @@ public class ChannelMenu extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int arg2, long arg3) {
                 // TODO Auto-generated method stub
-                Toast.makeText(ChannelMenu.this, "delete item in position : " + arg2, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChannelMenu.this, "Channel Deleted", Toast.LENGTH_SHORT).show();
                 int k = ((Cursor) deviceView.getItemAtPosition(arg2)).getInt(0);
                 deleteEntry(k);
                 Cursor cursor = conmanager.getDb().query(

@@ -1,9 +1,11 @@
 package com.example.nikos.watermonitorapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 
 public class GraphActivity extends AppCompatActivity {
 
@@ -19,6 +21,10 @@ public class GraphActivity extends AppCompatActivity {
         setTheme(R.style.GraphTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
+
+        Intent i = getIntent();
+        Integer kk= i.getExtras().getInt("kati");
+        Log.d("LOGGGG",kk.toString() );
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
