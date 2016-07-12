@@ -14,8 +14,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
-import java.util.ArrayList;
 
 public class ChannelMenu extends AppCompatActivity {
 
@@ -42,7 +42,7 @@ public class ChannelMenu extends AppCompatActivity {
 
 
         conmanager = new ConnectionManager(this);
-        ListView deviceView = (ListView) findViewById(R.id.AvailableDeviceslistView);
+        final ListView deviceView = (ListView) findViewById(R.id.AvailableDeviceslistView);
         projection = new String[]{
                 ChannelDatabase.DbEntry._ID,
                 ChannelDatabase.DbEntry.COLUNM_NAME_ID
@@ -64,10 +64,36 @@ public class ChannelMenu extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ChannelMenu.this, GraphActivity.class);
-                intent.putExtra("key1", id);
-                startActivityForResult(intent, 1);
+                //intent.putExtra("key1", id);
+                startActivity(intent);
             }
 
+        });
+        deviceView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int arg2, long arg3) {
+                // TODO Auto-generated method stub
+                Toast.makeText(ChannelMenu.this, "delete item in position : " + arg2, Toast.LENGTH_SHORT).show();
+                int k = ((Cursor) deviceView.getItemAtPosition(arg2)).getInt(0);
+                deleteEntry(k);
+                Cursor cursor = conmanager.getDb().query(
+                        ChannelDatabase.DbEntry.TABLE_NAME,  // The table to query
+                        projection,                               // The columns to return
+                        null,                                // The columns for the WHERE clause
+                        null,                            // The values for the WHERE clause
+                        null,                                     // don't group the rows
+                        null,                                     // don't filter by row groups
+                        null                                        // The sort order
+                );
+                adapter.changeCursor(cursor);
+
+
+
+
+                return true;
+            }
         });
 
     }
@@ -102,19 +128,48 @@ public class ChannelMenu extends AppCompatActivity {
     public void addEntry(int id){
         // Gets the data repository in write mode
 
+
+        SQLiteDatabase db = conmanager.getDb();
+        if(!inDb(db,id)){
+    // Create a new map of values, where column names are the keys
+            ContentValues values = new ContentValues();
+            values.put(ChannelDatabase.DbEntry.COLUNM_NAME_ID, id);
+
+    // Insert the new row, returning the primary key value of the new row
+            long newRowId;
+            newRowId = db.insert(
+                    ChannelDatabase.DbEntry.TABLE_NAME,
+                    null,
+                    values);}
+
+    }
+    public void deleteEntry(int id){
         SQLiteDatabase db = conmanager.getDb();
 
-// Create a new map of values, where column names are the keys
-        ContentValues values = new ContentValues();
-        values.put(ChannelDatabase.DbEntry.COLUNM_NAME_ID, id);
+        db.delete(ChannelDatabase.DbEntry.TABLE_NAME,"_ID = ?",new String[]{""+ id});
+    }
 
-// Insert the new row, returning the primary key value of the new row
-        long newRowId;
-        newRowId = db.insert(
+    public  boolean inDb(SQLiteDatabase sqldb,
+                                int id) {
+
+        String[] projection = new String[]{
+                ChannelDatabase.DbEntry.COLUNM_NAME_ID
+        };
+
+        Cursor cursor = sqldb.query(
                 ChannelDatabase.DbEntry.TABLE_NAME,
-                null,
-                values);
+                projection,
+                ChannelDatabase.DbEntry.COLUNM_NAME_ID + " = ?",
+                new String[]{Integer.toString(id)},
+                null, null, null, null
+        );
 
+        if(cursor.getCount() <= 0){
+            cursor.close();
+            return false;
+        }
+        cursor.close();
+        return true;
     }
 }
 
