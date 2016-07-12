@@ -87,26 +87,6 @@ public class ColumnChartFragment extends Fragment {
                 generateData();
                 return true;
 
-            case R.id.action_subcolumns:
-                dataType = SUBCOLUMNS_DATA;
-                generateData();
-                return true;
-
-            case R.id.action_stacked:
-                dataType = STACKED_DATA;
-                generateData();
-                return true;
-
-            case R.id.action_negative_subcolumns:
-                dataType = NEGATIVE_SUBCOLUMNS_DATA;
-                generateData();
-                return true;
-
-            case R.id.action_negative_stacked:
-                dataType = NEGATIVE_STACKED_DATA;
-                generateData();
-                return true;
-
             case R.id.action_toggle_labels:
                 toggleLabels();
                 return true;
@@ -117,11 +97,6 @@ public class ColumnChartFragment extends Fragment {
 
             case R.id.action_toggle_axes_names:
                 toggleAxesNames();
-                return true;
-
-            case R.id.action_animate:
-                prepareDataAnimation();
-                chart.startDataAnimation();
                 return true;
 
             case R.id.action_toggle_selection_mode:
@@ -164,7 +139,7 @@ public class ColumnChartFragment extends Fragment {
 
     }
 
-    private void generateDefaultData() {
+    private void generateData() {
         int numSubcolumns = 1;
         int numColumns = 8;
         // Column can have many subcolumns, here 1 subcolumn in each column.
@@ -201,212 +176,6 @@ public class ColumnChartFragment extends Fragment {
 
         chart.setColumnChartData(data);
 
-    }
-
-    /**
-     * Generates columns with subcolumns, columns have larger separation than subcolumns.
-     */
-    private void generateSubcolumnsData() {
-        int numSubcolumns = 4;
-        int numColumns = 4;
-        // Column can have many subcolumns, here 4 subcolumn in each column.
-        List<Column> columns = new ArrayList<>();
-        List<SubcolumnValue> values;
-        for (int i = 0; i < numColumns; ++i) {
-
-            values = new ArrayList<>();
-            for (int j = 0; j < numSubcolumns; ++j) {
-                values.add(new SubcolumnValue((float) Math.random() * 50f + 5, ChartUtils.pickColor()));
-            }
-
-            Column column = new Column(values);
-            column.setHasLabels(hasLabels);
-            column.setHasLabelsOnlyForSelected(hasLabelForSelected);
-            columns.add(column);
-        }
-
-        data = new ColumnChartData(columns);
-
-        if (hasAxes) {
-            Axis axisX = new Axis();
-            Axis axisY = new Axis().setHasLines(true);
-            if (hasAxesNames) {
-                axisX.setName("Axis X");
-                axisY.setName("Axis Y");
-            }
-            data.setAxisXBottom(axisX);
-            data.setAxisYLeft(axisY);
-        } else {
-            data.setAxisXBottom(null);
-            data.setAxisYLeft(null);
-        }
-
-        chart.setColumnChartData(data);
-
-    }
-
-    /**
-     * Generates columns with stacked subcolumns.
-     */
-    private void generateStackedData() {
-        int numSubcolumns = 4;
-        int numColumns = 8;
-        // Column can have many stacked subcolumns, here 4 stacked subcolumns in each column.
-        List<Column> columns = new ArrayList<>();
-        List<SubcolumnValue> values;
-        for (int i = 0; i < numColumns; ++i) {
-
-            values = new ArrayList<>();
-            for (int j = 0; j < numSubcolumns; ++j) {
-                values.add(new SubcolumnValue((float) Math.random() * 20f + 5, ChartUtils.pickColor()));
-            }
-
-            Column column = new Column(values);
-            column.setHasLabels(hasLabels);
-            column.setHasLabelsOnlyForSelected(hasLabelForSelected);
-            columns.add(column);
-        }
-
-        data = new ColumnChartData(columns);
-
-        // Set stacked flag.
-        data.setStacked(true);
-
-        if (hasAxes) {
-            Axis axisX = new Axis();
-            Axis axisY = new Axis().setHasLines(true);
-            if (hasAxesNames) {
-                axisX.setName("Axis X");
-                axisY.setName("Axis Y");
-            }
-            data.setAxisXBottom(axisX);
-            data.setAxisYLeft(axisY);
-        } else {
-            data.setAxisXBottom(null);
-            data.setAxisYLeft(null);
-        }
-
-        chart.setColumnChartData(data);
-    }
-
-    /**
-     * Generate subcolumns for both positive and negative y values
-     */
-    private void generateNegativeSubcolumnsData() {
-
-        int numSubcolumns = 4;
-        int numColumns = 4;
-        List<Column> columns = new ArrayList<>();
-        List<SubcolumnValue> values;
-        for (int i = 0; i < numColumns; ++i) {
-
-            values = new ArrayList<>();
-            for (int j = 0; j < numSubcolumns; ++j) {
-                int sign = getSign();
-                values.add(new SubcolumnValue((float) Math.random() * 50f * sign + 5 * sign, ChartUtils.pickColor
-                        ()));
-            }
-
-            Column column = new Column(values);
-            column.setHasLabels(hasLabels);
-            column.setHasLabelsOnlyForSelected(hasLabelForSelected);
-            columns.add(column);
-        }
-
-        data = new ColumnChartData(columns);
-
-        if (hasAxes) {
-            Axis axisX = new Axis();
-            Axis axisY = new Axis().setHasLines(true);
-            if (hasAxesNames) {
-                axisX.setName("Axis X");
-                axisY.setName("Axis Y");
-            }
-            data.setAxisXBottom(axisX);
-            data.setAxisYLeft(axisY);
-        } else {
-            data.setAxisXBottom(null);
-            data.setAxisYLeft(null);
-        }
-
-        chart.setColumnChartData(data);
-    }
-
-    /**
-     * Generate stacked subcolumns for both positive and negative y values
-     */
-    private void generateNegativeStackedData() {
-
-        int numSubcolumns = 4;
-        int numColumns = 8;
-        // Column can have many stacked subcolumns, here 4 stacked subcolumns in each column.
-        List<Column> columns = new ArrayList<>();
-        List<SubcolumnValue> values;
-        for (int i = 0; i < numColumns; ++i) {
-
-            values = new ArrayList<>();
-            for (int j = 0; j < numSubcolumns; ++j) {
-                int sign = getSign();
-                values.add(new SubcolumnValue((float) Math.random() * 20f * sign + 5 * sign, ChartUtils.pickColor()));
-            }
-
-            Column column = new Column(values);
-            column.setHasLabels(hasLabels);
-            column.setHasLabelsOnlyForSelected(hasLabelForSelected);
-            columns.add(column);
-        }
-
-        data = new ColumnChartData(columns);
-
-        // Set stacked flag.
-        data.setStacked(true);
-
-        if (hasAxes) {
-            Axis axisX = new Axis();
-            Axis axisY = new Axis().setHasLines(true);
-            if (hasAxesNames) {
-                axisX.setName("Axis X");
-                axisY.setName("Axis Y");
-            }
-            data.setAxisXBottom(axisX);
-            data.setAxisYLeft(axisY);
-        } else {
-            data.setAxisXBottom(null);
-            data.setAxisYLeft(null);
-        }
-
-        chart.setColumnChartData(data);
-    }
-
-    private int getSign() {
-        int[] sign = new int[]{-1, 1};
-        return sign[Math.round((float) Math.random())];
-    }
-
-    /**
-     * generate Data according to user's choice
-     */
-    private void generateData() {
-        switch (dataType) {
-            case DEFAULT_DATA:
-                generateDefaultData();
-                break;
-            case SUBCOLUMNS_DATA:
-                generateSubcolumnsData();
-                break;
-            case STACKED_DATA:
-                generateStackedData();
-                break;
-            case NEGATIVE_SUBCOLUMNS_DATA:
-                generateNegativeSubcolumnsData();
-                break;
-            case NEGATIVE_STACKED_DATA:
-                generateNegativeStackedData();
-                break;
-            default:
-                generateDefaultData();
-                break;
-        }
     }
 
     /**
