@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WaterMonitorApp</string>
+    <string name="addChannelButton">Προσθήκη Καναλιού</string>
+    <string name="channelIdText">Εισάγετε ένα ID</string>
+</resources>
