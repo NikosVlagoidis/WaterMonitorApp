@@ -12,7 +12,7 @@ public class ConnectionManager {
 
     public ConnectionManager(ChannelMenu main) {
         MyDbHelper dbHelper = new MyDbHelper(main);
-        db = dbHelper.getReadableDatabase();
+        db = dbHelper.getWritableDatabase();
     }
     public SQLiteDatabase getDb(){
         return db;
