@@ -294,8 +294,8 @@ public class LineChartFragment extends Fragment {
 
         if (isCubic) {
             final Viewport v = new Viewport(lineChart.getMaximumViewport());
-            v.bottom -= 5;//bot bound is 0
-            v.top -= 105;//top bound is 100
+            v.bottom = minValue - (maxValue+minValue)/2 - 5;
+            v.top = maxValue + (maxValue+minValue)/2 + 5;
 
             lineChart.setMaximumViewport(v);
 
