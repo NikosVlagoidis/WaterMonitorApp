@@ -79,9 +79,6 @@ public class AddChannelActivity extends AppCompatActivity {
             }
         });
 
-
-
-
     }
 }
 
