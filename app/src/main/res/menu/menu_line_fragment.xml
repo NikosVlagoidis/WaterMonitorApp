@@ -29,7 +29,7 @@
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_shape_circles"
-        android:title="string/circleShape"
+        android:title="@string/circleShape"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_shape_square"
