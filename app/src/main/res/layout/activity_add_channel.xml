@@ -30,6 +30,7 @@
         android:id="@+id/ChannelNickName"
         android:layout_below="@+id/ChannelNickName"
         android:layout_centerHorizontal="true"
+        android:textAlignment="center"
         android:layout_gravity="center"
         />
 
@@ -54,6 +55,7 @@
         android:id="@+id/ChannelId"
         android:layout_below="@+id/ChannelId"
         android:layout_centerHorizontal="true"
+        android:textAlignment="center"
         android:layout_gravity="center"
         />
 
