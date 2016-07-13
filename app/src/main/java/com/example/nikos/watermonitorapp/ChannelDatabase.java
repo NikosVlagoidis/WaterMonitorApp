@@ -23,6 +23,7 @@ public class ChannelDatabase {
                     DbEntry.COLUMN_NAME_NICKNAME + TEXT_TYPE + " )";
 
 
+
     public static String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS" + DbEntry.TABLE_NAME;
 }

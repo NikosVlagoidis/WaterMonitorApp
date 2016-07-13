@@ -26,24 +26,46 @@ public class AddChannelActivity extends AppCompatActivity {
 
         ChannelId.addTextChangedListener(new TextWatcher() {
             @Override
-            public void afterTextChanged(Editable arg0) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (ChannelId.length() == 0){
+            public void afterTextChanged(Editable arg0) {
+                if (ChannelId.length() == 0 || ChannelNickname.length() == 0){
                     GoButton.setEnabled(false);
                     GoButton.setClickable(false);
                 }else{
                     GoButton.setEnabled(true);
                     GoButton.setClickable(true);
                 }
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
             }
         });
+        ChannelNickname.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                if (ChannelId.length() == 0 || ChannelNickname.length() == 0){
+                    GoButton.setEnabled(false);
+                    GoButton.setClickable(false);
+                }else{
+                    GoButton.setEnabled(true);
+                    GoButton.setClickable(true);
+                }
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+        });
         GoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
