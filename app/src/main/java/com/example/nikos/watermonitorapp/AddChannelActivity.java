@@ -49,6 +49,9 @@ public class AddChannelActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String s = ChannelId.getText().toString();
                 String k = ChannelNickname.getText().toString();
+                if (k.matches("")){
+                    k=s;
+                }
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("result",s);
                 returnIntent.putExtra("Nickname",k);
