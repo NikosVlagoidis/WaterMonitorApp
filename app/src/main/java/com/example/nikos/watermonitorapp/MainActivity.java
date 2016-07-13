@@ -25,71 +25,61 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Bundle getData = getIntent().getExtras();
-//        String getData = getData.getString(“key”);
-//        editText.setText(getData);
-
-
-
-        // Connect to ThinkSpeak Channel 9
+        // Connect to ThinkSpeak Channel 9.
         tsChannel = new ThingSpeakChannel(132764);
-        // Set listener for Channel feed update events
+        // Set listener for Channel feed update events.
         tsChannel.setChannelFeedUpdateListener(new ThingSpeakChannel.ChannelFeedUpdateListener() {
             @Override
             public void onChannelFeedUpdated(long channelId, String channelName, ChannelFeed channelFeed) {
-                // Show Channel ID and name on the Action Bar
+                // Show Channel ID and name on the Action Bar.
                 getSupportActionBar().setTitle(channelName);
                 getSupportActionBar().setSubtitle("Channel " + channelId);
-                // Notify last update time of the Channel feed through a Toast message
+                // Notify last update time of the Channel feed through a Toast message.
                 Date lastUpdate = channelFeed.getChannel().getUpdatedAt();
                 Toast.makeText(MainActivity.this, lastUpdate.toString(), Toast.LENGTH_LONG).show();
             }
         });
-        // Fetch the specific Channel feed
+        // Fetch the specific Channel feed.
         tsChannel.loadChannelFeed();
 
-        // Create a Calendar object dated 5 minutes ago
+        // Create a Calendar object dated 5 minutes ago.
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE, -5);
 
-        // Configure LineChartView
+        // Configure LineChartView.
         chartView = (LineChartView) findViewById(R.id.chart);
         chartView.setZoomEnabled(true);
         chartView.setValueSelectionEnabled(true);
 
-        // Create a line chart from Field1 of ThinkSpeak Channel of your Choice (132764)
+        // Create a line chart from Field1 of ThinkSpeak Channel of your Choice (132764).
         tsChart = new ThingSpeakLineChart(132764, 1);
-        // Get 200 entries at maximum
+        // Get 200 entries at maximum.
         tsChart.setNumberOfEntries(200);
-        // Set value axis labels on 10-unit interval
+        // Set value axis labels on 10-unit interval.
         tsChart.setValueAxisLabelInterval(1);
-        // Set date axis labels on 5-minute interval
+        // Set date axis labels on 5-minute interval.
         tsChart.setDateAxisLabelInterval(1);
-        // Show the line as a cubic spline
+        // Show the line as a cubic spline.
         tsChart.useSpline(true);
-        // Set the line color
+        // Set the line color.
         tsChart.setLineColor(Color.parseColor("#D32F2F"));
-        // Set the axis color
+        // Set the axis color.
         tsChart.setAxisColor(Color.parseColor("#455a64"));
-        // Set the starting date (5 minutes ago) for the default viewport of the chart
+        // Set the starting date (5 minutes ago) for the default viewport of the chart.
         tsChart.setChartStartDate(calendar.getTime());
-        // Set listener for chart data update
+        // Set listener for chart data update.
         tsChart.setListener(new ThingSpeakLineChart.ChartDataUpdateListener() {
             @Override
             public void onChartDataUpdated(long channelId, int fieldId, String title, LineChartData lineChartData, Viewport maxViewport, Viewport initialViewport) {
                 // Set chart data to the LineChartView
                 chartView.setLineChartData(lineChartData);
-                // Set scrolling bounds of the chart
+                // Set scrolling bounds of the chart.
                 chartView.setMaximumViewport(maxViewport);
-                // Set the initial chart bounds
+                // Set the initial chart bounds.
                 chartView.setCurrentViewport(initialViewport);
             }
         });
-        // Load chart data asynchronously
+        // Load chart data asynchronously.
         tsChart.loadChartData();
-
-
     }
-
-
 }

@@ -24,12 +24,11 @@ public class GraphActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_graph);
 
-
-
             Intent i = getIntent();
             Integer kk= i.getExtras().getInt("kati");
             Log.d("LOGGGG",kk.toString() );
 
+            // Show Back Button and handle its events.
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -40,6 +39,7 @@ public class GraphActivity extends AppCompatActivity {
                     onBackPressed();
                 }
             });
+
             // Create the adapter that will return a fragment for each of the three
             // primary sections of the activity.
             mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -47,11 +47,11 @@ public class GraphActivity extends AppCompatActivity {
             // Set up the ViewPager with the sections adapter.
             mViewPager = (ViewPager) findViewById(R.id.container);
             mViewPager.setAdapter(mSectionsPagerAdapter);
-
         }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
 
+        // Handles the Back Button pressing event.
+        @Override
+        public void onBackPressed() {
+            super.onBackPressed();
+        }
 }

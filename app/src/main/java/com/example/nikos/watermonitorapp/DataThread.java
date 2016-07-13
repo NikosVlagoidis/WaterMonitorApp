@@ -23,8 +23,8 @@ public class DataThread extends Thread {
     }
 
     public void run(){
+        
         try
-
         {
             HttpClient client = new DefaultHttpClient();
             HttpGet httpGet = new HttpGet("http://api.thingspeak.com/channels/49728/feeds.json");
@@ -52,7 +52,9 @@ public class DataThread extends Thread {
             } else {
                 Log.d("Server response", "Failed to get server response");
             }
-        } catch (IOException e) {
+        }
+
+        catch (IOException e) {
         }
     }
 }

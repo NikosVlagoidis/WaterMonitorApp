@@ -241,10 +241,7 @@ public class ColumnChartFragment extends Fragment {
         @Override
         public void onValueDeselected() {
             // TODO Auto-generated method stub
-
         }
-
     }
-
 }
 
