@@ -3,13 +3,14 @@ package com.example.nikos.watermonitorapp;
 /**
  * Created by Nikos on 11/07/16.
  */
+
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -47,7 +48,11 @@ public class ChannelMenu extends AppCompatActivity {
         projection = new String[]{
                 ChannelDatabase.DbEntry._ID,
                 ChannelDatabase.DbEntry.COLUNM_NAME_ID,
+<<<<<<< Updated upstream
                 ChannelDatabase.DbEntry.COLUMN_NAME_NICKNAME
+=======
+                ChannelDatabase.DbEntry.COLUMN_NICKNAME
+>>>>>>> Stashed changes
         };
 
         Cursor cursor = conmanager.getDb().query(
@@ -58,7 +63,11 @@ public class ChannelMenu extends AppCompatActivity {
                 null,
                 null,
                 null);
+<<<<<<< Updated upstream
         String[] fromColums = {ChannelDatabase.DbEntry.COLUMN_NAME_NICKNAME};
+=======
+        String[] fromColums = {ChannelDatabase.DbEntry.COLUMN_NICKNAME};
+>>>>>>> Stashed changes
         int[] toViews = {R.id.deviceItem};
 
         adapter = new SimpleCursorAdapter(this, R.layout.list_item, cursor, fromColums, toViews, 0);
@@ -67,14 +76,39 @@ public class ChannelMenu extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                int item = ((Cursor) deviceView.getItemAtPosition(position)).getInt(1);
+                //Integer item = ((Cursor) deviceView.getItemAtPosition(position)).getInt(1);
+                //String nickname = ((Cursor) deviceView.getItemAtPosition(position)).toString();
+                //Log.d("NICKNAME   :  ", nickname );
+                /*Integer item;
+                projection = new String[]{
+                        ChannelDatabase.DbEntry._ID,
+                        ChannelDatabase.DbEntry.COLUNM_NAME_ID,
+                        ChannelDatabase.DbEntry.COLUMN_NICKNAME
+                };
+                Cursor cursor = conmanager.getDb().query(
+                        ChannelDatabase.DbEntry.TABLE_NAME,
+                        projection,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null);
+                String[] fromColums = {ChannelDatabase.DbEntry.COLUMN_NICKNAME};
 
                 Intent i = new Intent(ChannelMenu.this, GraphActivity.class);
                 i.putExtra("kati",item);
                 startActivity(i);
+                */
             }
         });
 
+<<<<<<< Updated upstream
+=======
+
+
+
+
+>>>>>>> Stashed changes
         deviceView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
             @Override
@@ -104,9 +138,23 @@ public class ChannelMenu extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
+<<<<<<< Updated upstream
                 String result=data.getStringExtra("result");
                 String nickname=data.getStringExtra("Nickname");
                 addEntry(nickname, Integer.parseInt(result));
+=======
+
+
+                String resultId=data.getStringExtra("resultId");
+                String resultNickName=data.getStringExtra("resultNickName");
+                addEntry(resultNickName,Integer.parseInt(resultId));
+
+//                ArrayAdapter<String> devAdapter = new ArrayAdapter<String>(ChannelMenu.this, R.layout.list_item, IdDatabase);
+//                ListView deviceView = (ListView) findViewById(R.id.AvailableDeviceslistView);
+//                deviceView.setAdapter(devAdapter);
+
+
+>>>>>>> Stashed changes
                 Cursor cursor = conmanager.getDb().query(
                         ChannelDatabase.DbEntry.TABLE_NAME,  // The table to query
                         projection,                               // The columns to return
@@ -120,11 +168,18 @@ public class ChannelMenu extends AppCompatActivity {
             }
         }
     }
+<<<<<<< Updated upstream
+=======
+    public void addEntry(String nickname, int id){
+        // Gets the data repository in write mode
+
+>>>>>>> Stashed changes
 
     public void addEntry(String nickname, int id){
         // Gets the data repository in write mode
         SQLiteDatabase db = conmanager.getDb();
         if(!inDb(db,id)){
+<<<<<<< Updated upstream
             // Create a new map of values, where column names are the keys
             ContentValues values = new ContentValues();
             values.put(ChannelDatabase.DbEntry.COLUMN_NAME_NICKNAME, nickname);
@@ -135,7 +190,23 @@ public class ChannelMenu extends AppCompatActivity {
                     ChannelDatabase.DbEntry.TABLE_NAME,
                     null,
                     values);}
+=======
+    // Create a new map of values, where column names are the keys
+        ContentValues values = new ContentValues();
+        values.put(ChannelDatabase.DbEntry.COLUNM_NAME_ID, id);
+        values.put(ChannelDatabase.DbEntry.COLUMN_NICKNAME,id);
+    // Insert the new row, returning the primary key value of the new row
+        long newRowId;
+        newRowId = db.insert(
+                ChannelDatabase.DbEntry.TABLE_NAME,
+                null,
+                values);}
+
+>>>>>>> Stashed changes
     }
+
+
+
     public void deleteEntry(int id){
         SQLiteDatabase db = conmanager.getDb();
         db.delete(ChannelDatabase.DbEntry.TABLE_NAME,"_ID = ?",new String[]{""+ id});

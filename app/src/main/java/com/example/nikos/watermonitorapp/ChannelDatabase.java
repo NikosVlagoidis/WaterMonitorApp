@@ -8,8 +8,17 @@ public class ChannelDatabase {
     public static abstract class DbEntry implements BaseColumns {
         public static final String TABLE_NAME = "Channel";
         public static final String COLUNM_NAME_ID = "ID";
+<<<<<<< Updated upstream
         public static final String COLUMN_NAME_NICKNAME = "Nickname";
     }
+=======
+        public static final String COLUMN_NICKNAME = "Nickname";
+    }
+        public static final String SQL_CREATE_ENTRIES =
+                "CREATE TABLE " + DbEntry.TABLE_NAME + " (" +
+                        DbEntry._ID + " INTEGER PRIMARY KEY," +
+                        DbEntry.COLUNM_NAME_ID + " INTEGER," + DbEntry.COLUMN_NICKNAME + "TEXT " + " )";
+>>>>>>> Stashed changes
 
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";

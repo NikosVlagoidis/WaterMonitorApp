@@ -2,8 +2,8 @@ package com.example.nikos.watermonitorapp;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -19,7 +19,11 @@ public class AddChannelActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_add_channel);
         final EditText ChannelId = (EditText)findViewById(R.id.ChannelId);
+<<<<<<< Updated upstream
         final EditText ChannelNickname = (EditText)findViewById(R.id.ChannelNickName);
+=======
+        final EditText NicknameId = (EditText) findViewById(R.id.ChannelNickName);
+>>>>>>> Stashed changes
         final Button GoButton = (Button)findViewById(R.id.GoBtn);
         GoButton.setEnabled(false);
 
@@ -68,15 +72,27 @@ public class AddChannelActivity extends AppCompatActivity {
         GoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+<<<<<<< Updated upstream
                 String s = ChannelId.getText().toString();
                 String k = ChannelNickname.getText().toString();
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("result",s);
                 returnIntent.putExtra("Nickname",k);
+=======
+                String chId = ChannelId.getText().toString();
+                String nickId = NicknameId.getText().toString();
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("resultId",chId);
+                returnIntent.putExtra("resultNickName", nickId);
+>>>>>>> Stashed changes
                 setResult(Activity.RESULT_OK,returnIntent);
                 finish();
             }
         });
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     }
 }
 

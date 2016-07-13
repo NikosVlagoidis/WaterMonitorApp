@@ -14,8 +14,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+<<<<<<< Updated upstream
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/setNicknameText"
+        android:layout_gravity="center"
+        android:id="@+id/getNicknamePrompt"
+
+        />
+=======
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Give your Nickname"
         android:layout_gravity="center"
         android:id="@+id/getNicknamePrompt"
 
@@ -25,6 +33,32 @@
         android:layout_width="wrap_content"
         android:layout_height="90sp"
         android:layout_weight="1"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/ChannelNickName"
+        android:layout_below="@+id/ChannelNickName"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Give a Channel ID"
+        android:layout_gravity="center"
+        android:id="@+id/getIdPrompt"
+
+         />
+
+>>>>>>> Stashed changes
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="90sp"
+        android:layout_weight="1"
+<<<<<<< Updated upstream
         android:inputType="text"
         android:ems="10"
         android:id="@+id/ChannelNickName"
@@ -49,6 +83,8 @@
         android:layout_width="wrap_content"
         android:layout_height="90sp"
         android:layout_weight="1"
+=======
+>>>>>>> Stashed changes
         android:inputType="number"
         android:ems="10"
         android:id="@+id/ChannelId"
@@ -69,11 +105,22 @@
             android:layout_height="wrap_content"
 
             android:layout_gravity="center"
+<<<<<<< Updated upstream
             android:text="@string/addChannelButton"
+=======
+            android:text="Add This Channel!"
+>>>>>>> Stashed changes
             android:clickable="false"
             android:id="@+id/GoBtn"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
+<<<<<<< Updated upstream
+=======
+
+
+
+    </RelativeLayout>
+>>>>>>> Stashed changes
 
 
 
