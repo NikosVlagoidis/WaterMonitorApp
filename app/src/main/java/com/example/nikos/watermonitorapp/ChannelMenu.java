@@ -53,7 +53,8 @@ public class ChannelMenu extends AppCompatActivity {
         final ListView deviceView = (ListView) findViewById(R.id.AvailableDeviceslistView);
         projection = new String[]{
                 ChannelDatabase.DbEntry._ID,
-                ChannelDatabase.DbEntry.COLUNM_NAME_ID
+                ChannelDatabase.DbEntry.COLUNM_NAME_ID,
+                ChannelDatabase.DbEntry.COLUNM_NAME_NICKNAME
         };
         Cursor cursor = conmanager.getDb().query(
                 ChannelDatabase.DbEntry.TABLE_NAME,
@@ -63,7 +64,7 @@ public class ChannelMenu extends AppCompatActivity {
                 null,
                 null,
                 null);
-        String[] fromColums = {ChannelDatabase.DbEntry.COLUNM_NAME_ID};
+        String[] fromColums = {ChannelDatabase.DbEntry.COLUNM_NAME_NICKNAME};
         int[] toViews = {R.id.deviceItem};
 
         adapter = new SimpleCursorAdapter(this, R.layout.list_item, cursor, fromColums, toViews, 0);
@@ -118,8 +119,7 @@ public class ChannelMenu extends AppCompatActivity {
 
                 String result=data.getStringExtra("result");
                 String nickname=data.getStringExtra("Nickname");
-                addEntry(Integer.parseInt(result));
-                Log.d("faiiiis",nickname);
+                addEntry(nickname, Integer.parseInt(result));
 
 //                ArrayAdapter<String> devAdapter = new ArrayAdapter<String>(ChannelMenu.this, R.layout.list_item, IdDatabase);
 //                ListView deviceView = (ListView) findViewById(R.id.AvailableDeviceslistView);
@@ -139,7 +139,7 @@ public class ChannelMenu extends AppCompatActivity {
             }
         }
     }
-    public void addEntry(int id){
+    public void addEntry(String nickname, int id){
         // Gets the data repository in write mode
 
 
@@ -147,7 +147,9 @@ public class ChannelMenu extends AppCompatActivity {
         if(!inDb(db,id)){
     // Create a new map of values, where column names are the keys
             ContentValues values = new ContentValues();
+            values.put(ChannelDatabase.DbEntry.COLUMN_NAME_NICKNAME, nickname);
             values.put(ChannelDatabase.DbEntry.COLUNM_NAME_ID, id);
+            
 
     // Insert the new row, returning the primary key value of the new row
             long newRowId;
