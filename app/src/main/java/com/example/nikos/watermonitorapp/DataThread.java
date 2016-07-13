@@ -1,6 +1,7 @@
 package com.example.nikos.watermonitorapp;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -16,10 +17,12 @@ import java.io.IOException;
 public class DataThread extends Thread {
 
     private float data[][];
+    private int id;
 
-    public DataThread(float array[][]){
+    public DataThread(float array[][],int id){
 
         data = array;
+        this.id = id;
     }
 
     public void run(){
@@ -27,7 +30,8 @@ public class DataThread extends Thread {
         try
         {
             HttpClient client = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet("http://api.thingspeak.com/channels/49728/feeds.json");
+            HttpGet httpGet = new HttpGet("http://api.thingspeak.com/channels/" +
+                    id + "/feeds.json");
             HttpResponse response = client.execute(httpGet);
 
             if (response.getStatusLine().getStatusCode() == 200) {
@@ -43,14 +47,13 @@ public class DataThread extends Thread {
                                 .toString().replace("-","").replace(":","").replace("T","").
                                         replace("Z","")); */
 
-                        float field1 =(float) Float.valueOf(jsonObject.optString("field4").
+                        float field1 =(float) Float.valueOf(jsonObject.optString("field1").
                                 toString());
-
                         data[0][i-(array.length()-100)] = field1;
                     }
                 }catch(JSONException j){j.printStackTrace();}
             } else {
-                Log.d("Server response", "Failed to get server response");
+                Log.e("Server response", "Failed to get server response");
             }
         }
 

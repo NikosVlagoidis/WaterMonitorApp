@@ -1,5 +1,7 @@
 package com.example.nikos.watermonitorapp;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -10,16 +12,27 @@ import android.support.v4.app.FragmentPagerAdapter;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-    public SectionsPagerAdapter(FragmentManager fm) {
+    private int id;
+
+    public SectionsPagerAdapter(FragmentManager fm,int kk) {
         super(fm);
+        id = kk;
     }
 
     @Override
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a LineChartFragment (defined as a static inner class below).
-        return position == 0 ? LineChartFragment.newInstance(position + 1):
-                ColumnChartFragment.newInstance(position + 1);
+        Fragment frag;
+        Bundle args1 = new Bundle();
+        args1.putInt("cid", id);
+        if (position == 0) {
+            frag = LineChartFragment.newInstance(position + 1);
+        } else {
+            frag = ColumnChartFragment.newInstance(position + 1);
+        }
+        frag.setArguments(args1);
+        return frag;
     }
 
     @Override

@@ -26,7 +26,6 @@ public class GraphActivity extends AppCompatActivity {
 
             Intent i = getIntent();
             Integer kk= i.getExtras().getInt("kati");
-            Log.d("LOGGGG",kk.toString() );
 
             // Show Back Button and handle its events.
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -42,7 +41,7 @@ public class GraphActivity extends AppCompatActivity {
 
             // Create the adapter that will return a fragment for each of the three
             // primary sections of the activity.
-            mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+            mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),kk);
 
             // Set up the ViewPager with the sections adapter.
             mViewPager = (ViewPager) findViewById(R.id.container);

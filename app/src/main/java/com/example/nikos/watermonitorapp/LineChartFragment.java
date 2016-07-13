@@ -34,6 +34,9 @@ public class LineChartFragment extends Fragment {
     private int numOfLines = 1;
     private int maxNumOfLines = 100;
     private int numOfPoints = 100;
+    private float minValue;
+    private float maxValue;
+    private int id;
 
     float[][] randomNumbersTab=new float[maxNumOfLines][numOfPoints];
 
@@ -51,6 +54,12 @@ public class LineChartFragment extends Fragment {
     public LineChartFragment() {
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceBundle){
+        super.onCreate(savedInstanceBundle);
+
+        id = getArguments().getInt("cid");
+    }
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -67,6 +76,7 @@ public class LineChartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         getData();
+        minMax();
         setHasOptionsMenu(true);
         View rootView = inflater.inflate(R.layout.fragment_line_chart, container, false);
 
@@ -199,8 +209,8 @@ public class LineChartFragment extends Fragment {
     private void resetViewport() {
         // Reset viewport height range to (0,100)
         final Viewport v = new Viewport(lineChart.getMaximumViewport());
-        v.bottom = 0;
-        v.top = 100;
+        v.bottom = minValue - (maxValue+minValue)/2;
+        v.top = maxValue + (maxValue+minValue)/2;
         v.left = 0;
         v.right = numOfPoints - 1;
         lineChart.setMaximumViewport(v);
@@ -218,7 +228,7 @@ public class LineChartFragment extends Fragment {
 
                 List<PointValue> values = new ArrayList<>();
                 for (int j = 0; j < numOfPoints; ++j) {
-                    values.add(new PointValue(j, randomNumbersTab[i][j]));
+                    values.add(new PointValue(j, randomNumbersTab[0][i]));
                 }
                 Line line = new Line(values);
                 line.setColor(ChartUtils.COLORS[i]);
@@ -284,8 +294,8 @@ public class LineChartFragment extends Fragment {
 
         if (isCubic) {
             final Viewport v = new Viewport(lineChart.getMaximumViewport());
-            v.bottom = -5;//bot bound is 0
-            v.top = 105;//top bound is 100
+            v.bottom -= 5;//bot bound is 0
+            v.top -= 105;//top bound is 100
 
             lineChart.setMaximumViewport(v);
 
@@ -293,8 +303,8 @@ public class LineChartFragment extends Fragment {
         } else {
             // If not cubic restore viewport to (0,100) range.
             final Viewport v = new Viewport(lineChart.getMaximumViewport());
-            v.bottom = 0;
-            v.top = 100;
+            v.bottom = minValue - 50/100*minValue;
+            v.top = 100 + 50/100*maxValue;
 
             lineChart.setViewportAnimationListener(new ChartAnimationListener() {
 
@@ -409,9 +419,24 @@ public class LineChartFragment extends Fragment {
         generateData();
     }
 
+    private void minMax(){
+        float min = 3000000f;
+        float max = -500000f;
+        for(int i =0; i<randomNumbersTab.length; i++) {
+            if (randomNumbersTab[0][i] < min) {
+                min = randomNumbersTab[0][i];
+            }
+            if (randomNumbersTab[0][i] > max) {
+                max = randomNumbersTab[0][i];
+            }
+        }
+
+        minValue = min;
+        maxValue = max;
+    }
 
     private void getData(){
-        DataThread dt = new DataThread(randomNumbersTab);
+        DataThread dt = new DataThread(randomNumbersTab,id);
         dt.start();
         try{
             dt.join();

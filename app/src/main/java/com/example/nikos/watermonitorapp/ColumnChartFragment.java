@@ -39,8 +39,16 @@ public class ColumnChartFragment extends Fragment {
     private boolean hasLabelForSelected = false;
     private int maxNumOfLines = 100;
     private int numOfPoints = 100;
+    private int id;
     float[][] randomNumbersTab=new float[maxNumOfLines][numOfPoints];
     public ColumnChartFragment() {
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceBundle){
+        super.onCreate(savedInstanceBundle);
+
+        id = getArguments().getInt("cid");
     }
 
     /**
@@ -222,9 +230,11 @@ public class ColumnChartFragment extends Fragment {
     }
 
     private void getData(){
-        DataThread dt = new DataThread(randomNumbersTab);
+        Log.i("BOOM","BOOOOOOOOOM");
+        DataThread dt = new DataThread(randomNumbersTab,id);
         dt.start();
         try{
+            Log.i("BOOM1","BOOOOOOOOOM1");
             dt.join();
         }catch(InterruptedException m){
             Log.i("INTERRUPTED","INTERRUPTED");}
