@@ -19,7 +19,7 @@ public class ChannelDatabase {
     public static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + DbEntry.TABLE_NAME + " (" +
                     DbEntry._ID + " INTEGER PRIMARY KEY" + COMMA_SEP +
-                    DbEntry.COLUMN_NAME_ID + " INTEGER" + COMMA_SEP +
+                    DbEntry.COLUNM_NAME_ID + " INTEGER" + COMMA_SEP +
                     DbEntry.COLUMN_NAME_NICKNAME + TEXT_TYPE + " )";
 
 

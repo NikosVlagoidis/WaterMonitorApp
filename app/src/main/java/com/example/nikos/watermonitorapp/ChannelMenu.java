@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -30,15 +29,10 @@ public class ChannelMenu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.channel_menu_fab);
-
         tsChannel = new ThingSpeakChannel(132764);
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.plus_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,14 +41,12 @@ public class ChannelMenu extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
-
-
         conmanager = new ConnectionManager(this);
         final ListView deviceView = (ListView) findViewById(R.id.AvailableDeviceslistView);
         projection = new String[]{
                 ChannelDatabase.DbEntry._ID,
                 ChannelDatabase.DbEntry.COLUNM_NAME_ID,
-                ChannelDatabase.DbEntry.COLUNM_NAME_NICKNAME
+                ChannelDatabase.DbEntry.COLUMN_NAME_NICKNAME
         };
         Cursor cursor = conmanager.getDb().query(
                 ChannelDatabase.DbEntry.TABLE_NAME,
@@ -64,7 +56,7 @@ public class ChannelMenu extends AppCompatActivity {
                 null,
                 null,
                 null);
-        String[] fromColums = {ChannelDatabase.DbEntry.COLUNM_NAME_NICKNAME};
+        String[] fromColums = {ChannelDatabase.DbEntry.COLUMN_NAME_NICKNAME};
         int[] toViews = {R.id.deviceItem};
 
         adapter = new SimpleCursorAdapter(this, R.layout.list_item, cursor, fromColums, toViews, 0);
@@ -101,10 +93,6 @@ public class ChannelMenu extends AppCompatActivity {
                         null                                        // The sort order
                 );
                 adapter.changeCursor(cursor);
-
-
-
-
                 return true;
             }
         });
@@ -115,17 +103,9 @@ public class ChannelMenu extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-
-
                 String result=data.getStringExtra("result");
                 String nickname=data.getStringExtra("Nickname");
                 addEntry(nickname, Integer.parseInt(result));
-
-//                ArrayAdapter<String> devAdapter = new ArrayAdapter<String>(ChannelMenu.this, R.layout.list_item, IdDatabase);
-//                ListView deviceView = (ListView) findViewById(R.id.AvailableDeviceslistView);
-//                deviceView.setAdapter(devAdapter);
-
-
                 Cursor cursor = conmanager.getDb().query(
                         ChannelDatabase.DbEntry.TABLE_NAME,  // The table to query
                         projection,                               // The columns to return
@@ -141,37 +121,28 @@ public class ChannelMenu extends AppCompatActivity {
     }
     public void addEntry(String nickname, int id){
         // Gets the data repository in write mode
-
-
         SQLiteDatabase db = conmanager.getDb();
         if(!inDb(db,id)){
-    // Create a new map of values, where column names are the keys
+            // Create a new map of values, where column names are the keys
             ContentValues values = new ContentValues();
             values.put(ChannelDatabase.DbEntry.COLUMN_NAME_NICKNAME, nickname);
             values.put(ChannelDatabase.DbEntry.COLUNM_NAME_ID, id);
-            
-
-    // Insert the new row, returning the primary key value of the new row
+            // Insert the new row, returning the primary key value of the new row
             long newRowId;
             newRowId = db.insert(
                     ChannelDatabase.DbEntry.TABLE_NAME,
                     null,
                     values);}
-
     }
     public void deleteEntry(int id){
         SQLiteDatabase db = conmanager.getDb();
-
         db.delete(ChannelDatabase.DbEntry.TABLE_NAME,"_ID = ?",new String[]{""+ id});
     }
-
     public  boolean inDb(SQLiteDatabase sqldb,
                                 int id) {
-
         String[] projection = new String[]{
                 ChannelDatabase.DbEntry.COLUNM_NAME_ID
         };
-
         Cursor cursor = sqldb.query(
                 ChannelDatabase.DbEntry.TABLE_NAME,
                 projection,
@@ -179,7 +150,6 @@ public class ChannelMenu extends AppCompatActivity {
                 new String[]{Integer.toString(id)},
                 null, null, null, null
         );
-
         if(cursor.getCount() <= 0){
             cursor.close();
             return false;
