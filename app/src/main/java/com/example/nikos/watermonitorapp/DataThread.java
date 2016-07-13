@@ -40,7 +40,7 @@ public class DataThread extends Thread {
                     JSONObject jsonRootObject = new JSONObject(server_response);
 
                     JSONArray array = jsonRootObject.getJSONArray("feeds");
-                    for(int i=array.length()-100; i<array.length(); i++){
+                    for(int i=0; i<array.length(); i++){
                         JSONObject jsonObject = array.getJSONObject(i);
                         //float entryIds = Float.valueOf(jsonObject.optString("entry_id").toString());
                         /*float date_created = Float.valueOf(jsonObject.optString("created_at")

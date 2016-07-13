@@ -227,8 +227,9 @@ public class LineChartFragment extends Fragment {
             for (int i = 0; i < numOfLines; ++i) {
 
                 List<PointValue> values = new ArrayList<>();
+
                 for (int j = 0; j < numOfPoints; ++j) {
-                    values.add(new PointValue(j, randomNumbersTab[0][i]));
+                    values.add(new PointValue(j, randomNumbersTab[0][j]));
                 }
                 Line line = new Line(values);
                 line.setColor(ChartUtils.COLORS[i]);
