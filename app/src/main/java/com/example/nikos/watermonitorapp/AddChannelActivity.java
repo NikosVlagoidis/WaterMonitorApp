@@ -11,11 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class AddChannelActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
-
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_add_channel);
@@ -25,47 +24,47 @@ public class AddChannelActivity extends AppCompatActivity {
         GoButton.setEnabled(false);
 
         ChannelId.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
             @Override
             public void afterTextChanged(Editable arg0) {
                 if (ChannelId.length() == 0 || ChannelNickname.length() == 0){
                     GoButton.setEnabled(false);
                     GoButton.setClickable(false);
-                }else{
+                }
+                else{
                     GoButton.setEnabled(true);
                     GoButton.setClickable(true);
                 }
-
             }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
+
         ChannelNickname.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
             @Override
             public void afterTextChanged(Editable arg0) {
                 if (ChannelId.length() == 0 || ChannelNickname.length() == 0){
                     GoButton.setEnabled(false);
                     GoButton.setClickable(false);
-                }else{
+                }
+                else{
                     GoButton.setEnabled(true);
                     GoButton.setClickable(true);
                 }
-
             }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
+
         GoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -78,7 +77,6 @@ public class AddChannelActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }
 

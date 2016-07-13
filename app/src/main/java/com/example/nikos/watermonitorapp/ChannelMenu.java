@@ -41,6 +41,7 @@ public class ChannelMenu extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
+
         conmanager = new ConnectionManager(this);
         final ListView deviceView = (ListView) findViewById(R.id.AvailableDeviceslistView);
         projection = new String[]{
@@ -48,6 +49,7 @@ public class ChannelMenu extends AppCompatActivity {
                 ChannelDatabase.DbEntry.COLUNM_NAME_ID,
                 ChannelDatabase.DbEntry.COLUMN_NAME_NICKNAME
         };
+
         Cursor cursor = conmanager.getDb().query(
                 ChannelDatabase.DbEntry.TABLE_NAME,
                 projection,
@@ -67,13 +69,12 @@ public class ChannelMenu extends AppCompatActivity {
 
                 int item = ((Cursor) deviceView.getItemAtPosition(position)).getInt(1);
 
-
                 Intent i = new Intent(ChannelMenu.this, GraphActivity.class);
                 i.putExtra("kati",item);
                 startActivity(i);
             }
-
         });
+
         deviceView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
             @Override
@@ -92,11 +93,11 @@ public class ChannelMenu extends AppCompatActivity {
                         null,                                     // don't filter by row groups
                         null                                        // The sort order
                 );
+
                 adapter.changeCursor(cursor);
                 return true;
             }
         });
-
     }
 
     @Override
@@ -119,6 +120,7 @@ public class ChannelMenu extends AppCompatActivity {
             }
         }
     }
+
     public void addEntry(String nickname, int id){
         // Gets the data repository in write mode
         SQLiteDatabase db = conmanager.getDb();
@@ -138,11 +140,13 @@ public class ChannelMenu extends AppCompatActivity {
         SQLiteDatabase db = conmanager.getDb();
         db.delete(ChannelDatabase.DbEntry.TABLE_NAME,"_ID = ?",new String[]{""+ id});
     }
+
     public  boolean inDb(SQLiteDatabase sqldb,
                                 int id) {
         String[] projection = new String[]{
                 ChannelDatabase.DbEntry.COLUNM_NAME_ID
         };
+
         Cursor cursor = sqldb.query(
                 ChannelDatabase.DbEntry.TABLE_NAME,
                 projection,
@@ -150,6 +154,7 @@ public class ChannelMenu extends AppCompatActivity {
                 new String[]{Integer.toString(id)},
                 null, null, null, null
         );
+
         if(cursor.getCount() <= 0){
             cursor.close();
             return false;
