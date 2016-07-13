@@ -20,6 +20,7 @@ public class AddChannelActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_add_channel);
         final EditText ChannelId = (EditText)findViewById(R.id.ChannelId);
+        final EditText ChannelNickname = (EditText)findViewById(R.id.ChannelNickName);
         final Button GoButton = (Button)findViewById(R.id.GoBtn);
         GoButton.setEnabled(false);
 
@@ -47,8 +48,10 @@ public class AddChannelActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String s = ChannelId.getText().toString();
+                String k = ChannelNickname.getText().toString();
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("result",s);
+                returnIntent.putExtra("Nickname",k);
                 setResult(Activity.RESULT_OK,returnIntent);
                 finish();
             }

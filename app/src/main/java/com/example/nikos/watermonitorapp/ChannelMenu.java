@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -73,6 +74,7 @@ public class ChannelMenu extends AppCompatActivity {
 
                 int item = ((Cursor) deviceView.getItemAtPosition(position)).getInt(1);
 
+
                 Intent i = new Intent(ChannelMenu.this, GraphActivity.class);
                 i.putExtra("kati",item);
                 startActivity(i);
@@ -115,7 +117,9 @@ public class ChannelMenu extends AppCompatActivity {
 
 
                 String result=data.getStringExtra("result");
+                String nickname=data.getStringExtra("Nickname");
                 addEntry(Integer.parseInt(result));
+                Log.d("faiiiis",nickname);
 
 //                ArrayAdapter<String> devAdapter = new ArrayAdapter<String>(ChannelMenu.this, R.layout.list_item, IdDatabase);
 //                ListView deviceView = (ListView) findViewById(R.id.AvailableDeviceslistView);
