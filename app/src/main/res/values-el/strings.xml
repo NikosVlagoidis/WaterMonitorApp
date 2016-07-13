@@ -4,4 +4,23 @@
     <string name="channelIdText">Εισάγετε ένα ID</string>
     <string name="setNicknameText">Εισάγετε ένα Ψευδώνυμο</string>
     <string name="availableDevicesPromt">Οι Διαθέσιμες Συσκευές σας</string>
+    <string name="resetChart">Επαναφορά Γραφήματος</string>
+    <string name="toggleAxes">Εναλλαγή Αξόνων</string>
+    <string name="toggleAxesNames">Εναλλαγή Ονομάτων Αξόνων</string>
+    <string name="toggleLabels">Εναλλαγή Ετικετών</string>
+    <string name="ActionToggleSelectionMode">Εναλλαγή Κατάστασης Επιλογής</string>
+    <string name="toggleTouchZoom">Εναλλαγή Ζουμ</string>
+    <string name="zoomXY">Ζουμ X/Y</string>
+    <string name="zoomX">Ζουμ X</string>
+    <string name="zoomY">Ζουμ Y</string>
+    <string name="toggleLinesScattered">Εναλλαγή Γραμμών/Σποραδικά</string>
+    <string name="togglePoints">Εναλλαγή Σημείων</string>
+    <string name="toggleCubicCurve">Εναλλαγή Κυβικών Καμπύλων</string>
+    <string name="toggleArea">Εναλλαγή Περιοχής</string>
+    <string name="togglePointColor">Εναλλαγή Χρωμάτων Σημείων</string>
+    <string name="circleShape">Κυκλικό Σχήμα</string>
+    <string name="squareShape">Τετραγωνικό Σχήμα</string>
+    <string name="diamondShape">Σχήμα Διαμαντιού</string>
+    <string name="axisX">Άξονας X</string>
+    <string name="axisY">Άξονας Y</string>
 </resources>

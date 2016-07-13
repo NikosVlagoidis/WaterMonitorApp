@@ -5,71 +5,71 @@
 
     <item
         android:id="@+id/action_reset"
-        android:title="Reset chart"
+        android:title="@string/resetChart"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_toggle_lines"
-        android:title="Toggle lines/scattered"
+        android:title="@string/toggleLinesScattered"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_toggle_points"
-        android:title="Toggle points"
+        android:title="@string/togglePoints"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_toggle_cubic"
-        android:title="Toggle Cubic curve"
+        android:title="@string/toggleCubicCurve"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_toggle_area"
-        android:title="Toggle area"
+        android:title="@string/toggleArea"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_point_color"
-        android:title="Toggle Point Color"
+        android:title="@string/togglePointColor"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_shape_circles"
-        android:title="Circle shape"
+        android:title="string/circleShape"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_shape_square"
-        android:title="Square shape"
+        android:title="@string/squareShape"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_shape_diamond"
-        android:title="Diamond shape"
+        android:title="@string/diamondShape"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_toggle_axes"
-        android:title="Toggle axes"
+        android:title="@string/toggleAxes"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_toggle_axes_names"
-        android:title="Toggle axes names"
+        android:title="@string/toggleAxesNames"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_toggle_labels"
-        android:title="Toggle labels"
+        android:title="@string/toggleLabels"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_toggle_selection_mode"
-        android:title="Toggle selection mode"
+        android:title="@string/ActionToggleSelectionMode"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_toggle_touch_zoom"
-        android:title="Toggle touch zoom"
+        android:title="@string/toggleTouchZoom"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_zoom_both"
-        android:title="Zoom X/Y"
+        android:title="@string/zoomXY"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_zoom_horizontal"
-        android:title="Zoom X"
+        android:title="@string/zoomX"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_zoom_vertical"
-        android:title="Zoom Y"
+        android:title="@string/zoomY"
         app:showAsAction="never"/>
 
 </menu>

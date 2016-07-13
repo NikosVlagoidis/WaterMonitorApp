@@ -252,8 +252,8 @@ public class LineChartFragment extends Fragment {
                 Axis axisX = new Axis();
                 Axis axisY = new Axis().setHasLines(true);
                 if (hasAxesNames) {
-                    axisX.setName("Axis X");
-                    axisY.setName("Axis Y");
+                    axisX.setName("@string/axisX");
+                    axisY.setName("@string/axisY");
                 }
                 data.setAxisXBottom(axisX);
                 data.setAxisYLeft(axisY);

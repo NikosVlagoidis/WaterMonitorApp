@@ -4,4 +4,23 @@
     <string name="channelIdText">Give a Channel ID</string>
     <string name="setNicknameText">Enter a Nickname</string>
     <string name="availableDevicesPromt">Your Available Devices</string>
+    <string name="resetChart">Reset Chart</string>
+    <string name="toggleAxes">Toggle Axes</string>
+    <string name="toggleAxesNames">Toggle Axes Names</string>
+    <string name="toggleLabels">Toggle Labels</string>
+    <string name="ActionToggleSelectionMode">Toggle Selection Mode</string>
+    <string name="toggleTouchZoom">Toggle Touch Zoom</string>
+    <string name="zoomXY">Zoom X/Y</string>
+    <string name="zoomX">Zoom X</string>
+    <string name="zoomY">Zoom Y</string>
+    <string name="toggleLinesScattered">Toggle Lines/Scattered</string>
+    <string name="togglePoints">Toggle Points</string>
+    <string name="toggleCubicCurve">Toggle Cubic Curve</string>
+    <string name="toggleArea">Toggle Area</string>
+    <string name="togglePointColor">Toggle Point Color</string>
+    <string name="circleShape">Circle Shape</string>
+    <string name="squareShape">Square Shape</string>
+    <string name="diamondShape">Diamond Shape</string>
+    <string name="axisX">Axis X</string>
+    <string name="axisY">Axis Y</string>
 </resources>
